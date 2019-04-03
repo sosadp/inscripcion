@@ -2,10 +2,11 @@ package com.djsm.inscripcion.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name="Especialidad")
-public class Especialidades implements Serializable{
+public class Especialidad implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,10 +16,22 @@ public class Especialidades implements Serializable{
     private String especilidad;
 
 
-    public Especialidades() {
+    @ManyToMany
+    @JoinTable(name = "mat_curso",joinColumns = @JoinColumn(name = "especialidad_id"),inverseJoinColumns = @JoinColumn(name = "materias_id"))
+    private Set<Materia> materias;
+
+    public Set<Materia> getMaterias() {
+        return materias;
     }
 
-    public Especialidades(String especilidad) {
+    public void setMaterias(Set<Materia> materias) {
+        this.materias = materias;
+    }
+
+    public Especialidad() {
+    }
+
+    public Especialidad(String especilidad) {
         this.especilidad = especilidad;
     }
 
@@ -36,5 +49,9 @@ public class Especialidades implements Serializable{
 
     public void setEspecilidad(String especilidad) {
         this.especilidad = especilidad;
+    }
+
+    public Especialidad(Set<Materia> materias) {
+        this.materias = materias;
     }
 }

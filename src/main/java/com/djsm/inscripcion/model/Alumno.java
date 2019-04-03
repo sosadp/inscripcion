@@ -6,8 +6,8 @@ import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @Entity
-@Table(name="Alumnos")
-public class Alumnos implements Serializable{
+@Table(name="Alumno")
+public class Alumno implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +28,10 @@ public class Alumnos implements Serializable{
     private String direccion;
 
 
-    public Alumnos() {
+    public Alumno() {
     }
 
-    public Alumnos(@NotEmpty String cedula, String nombre, String apellido, String direccion) {
+    public Alumno(@NotEmpty String cedula, String nombre, String apellido, String direccion) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
