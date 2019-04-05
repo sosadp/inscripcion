@@ -4,11 +4,6 @@ server:
       context-path: /ins
 spring:
     profiles: local, default
-    devtools:
-      restart:
-        enabled: true
-      livereload:
-        enabled: true
 
     h2:
        console:

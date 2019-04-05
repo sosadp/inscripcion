@@ -1,18 +1,17 @@
 package com.djsm.inscripcion.controller;
 
 import com.djsm.inscripcion.model.Alumno;
-import com.djsm.inscripcion.repositories.AlumnoRepository;
+
 import com.djsm.inscripcion.service.AlumnoService;
+import com.djsm.inscripcion.util.CustomerErrorType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class AlumnosApiController {
     @Autowired
     AlumnoService alumnoService;
 
-    @RequestMapping(name = "/alumnos",method = RequestMethod.GET)
+    @RequestMapping(value = "/alumnos",method = RequestMethod.GET)
     public ResponseEntity<List<Alumno>> listAllAlumnos(){
 
         List<Alumno> alumnos =alumnoService.findByAlumnos();
@@ -36,5 +35,26 @@ public class AlumnosApiController {
             }
 
         return new ResponseEntity<List<Alumno>>(alumnos,HttpStatus.OK);
+    }
+
+    @RequestMapping(name = "/alumnos",method =RequestMethod.POST)
+    public ResponseEntity<?> createAlumnos(@RequestBody Alumno alumno, UriComponentsBuilder ucBuilder){
+        LOGGER.info("Se va a crear un alumno",alumno.getCedula());
+
+        Alumno currentAlumno= new Alumno();
+
+        if (alumnoService.isExistAlumno(alumno)){
+            LOGGER.error("Este alumno ya existe {}",alumno.getCedula()) ;
+
+            return new ResponseEntity(new CustomerErrorType("No se puede registrar el alumno "+alumno.getCedula()),HttpStatus.CONFLICT);
+        }
+
+        alumnoService.saveAlumno(alumno);
+
+        HttpHeaders headers=new HttpHeaders();
+
+        headers.setLocation(ucBuilder.path("/api/alumnos/{id}").buildAndExpand(alumno.getCedula()).toUri());
+
+        return new ResponseEntity<String>(headers,HttpStatus.CREATED);
     }
 }
