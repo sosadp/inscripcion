@@ -2,6 +2,7 @@ package com.djsm.inscripcion.configuration;
 
 
 import com.zaxxer.hikari.HikariDataSource;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -18,7 +19,7 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.util.StringUtils;
+
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -44,20 +45,20 @@ public class JpaConfiguration {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(){
-        LocalContainerEntityManagerFactoryBean factoryBean= new LocalContainerEntityManagerFactoryBean();
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
+        LocalContainerEntityManagerFactoryBean factoryBean =new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
         factoryBean.setPackagesToScan(new String[] {"com.djsm.inscripcion.model"});
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         factoryBean.setJpaProperties(jpaProperties());
-
         return factoryBean;
+
     }
 
     @Bean
     public DataSource dataSource() {
-        DataSourceProperties dataSourceProperties =dataSourceProperties();
-        HikariDataSource dataSource= DataSourceBuilder
+        DataSourceProperties dataSourceProperties = dataSourceProperties();
+        HikariDataSource dataSource = DataSourceBuilder
                 .create(dataSourceProperties.getClassLoader())
                 .driverClassName(dataSourceProperties.getDriverClassName())
                 .url(dataSourceProperties.getUrl())
@@ -67,7 +68,6 @@ public class JpaConfiguration {
                 .build();
         dataSource.setMaximumPoolSize(maxPoolSize);
         return dataSource;
-
     }
 
     @Bean
@@ -82,7 +82,7 @@ public class JpaConfiguration {
         properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("datasource.insapp.hibernate.hbm2ddl.method"));
         properties.put("hibernate.show_sql", environment.getRequiredProperty("datasource.insapp.hibernate.show_sql"));
         properties.put("hibernate.format_sql", environment.getRequiredProperty("datasource.insapp.hibernate.format_sql"));
-        if (StringUtils.isEmpty(environment.getRequiredProperty("datasource.insapp.defaultSchema"))){
+        if (StringUtils.isNotEmpty (environment.getRequiredProperty("datasource.insapp.defaultSchema"))){
             properties.put("hibernate.default_schema", environment.getRequiredProperty("datasource.insapp.defaultSchema"));
         }
 

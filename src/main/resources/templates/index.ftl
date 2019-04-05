@@ -8,5 +8,6 @@
 
     <h1> Sistema de inscripcion de cursos... en proceso...</h1>
     <h2>Desarrollo con spring boot</h2>
+
 </body>
 </html>

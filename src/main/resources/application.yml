@@ -25,7 +25,7 @@ datasource:
           maxPoolSize: 10
           initialization-mode: embedded
           hibernate:
-            hbm2ddl.method: update
+            hbm2ddl.method: create-drop
             show_sql: true
             format_sql: true
             dialect: org.hibernate.dialect.H2Dialect
