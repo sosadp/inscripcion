@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service("EspecialidadService")
+@Service("especialidadService")
 @Transactional
 public class EspecialidadServiceImpl implements EspecialidadService{
 
@@ -46,7 +46,7 @@ public class EspecialidadServiceImpl implements EspecialidadService{
     }
 
     @Override
-    public Boolean isExistEspe(Especialidad especialidad) {
-        return especialidadRepository.findByEspecilidad(especialidad.getEspecilidad())!=null;
+    public Boolean isExistEspe(String especialidad, Long id) {
+        return especialidadRepository.findByEspecilidadAndId(especialidad, id)!=null;
     }
 }

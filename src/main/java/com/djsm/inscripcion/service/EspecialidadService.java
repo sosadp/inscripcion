@@ -18,6 +18,6 @@ public interface EspecialidadService {
 
     void deleteById(Long id);
 
-    Boolean isExistEspe(Especialidad especialidad);
+    Boolean isExistEspe(String especialidad, Long id);
 
 }

@@ -2,10 +2,12 @@ package com.djsm.inscripcion.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+
 import java.io.Serializable;
+
 
 @Entity
 @Table(name="Alumno")

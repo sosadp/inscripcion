@@ -18,14 +18,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class AlumnosApiController {
+public class AlumnoApiController {
 
-    public static Logger LOGGER = LoggerFactory.getLogger(AlumnosApiController.class);
+    public static Logger LOGGER = LoggerFactory.getLogger(AlumnoApiController.class);
 
     @Autowired
     AlumnoService alumnoService;
 
-    @RequestMapping(value = "/alumnos",method = RequestMethod.GET)
+    @RequestMapping(value = "/alumno/",method = RequestMethod.GET)
     public ResponseEntity<List<Alumno>> listAllAlumnos(){
 
         List<Alumno> alumnos =alumnoService.findByAlumnos();
@@ -37,11 +37,11 @@ public class AlumnosApiController {
         return new ResponseEntity<List<Alumno>>(alumnos,HttpStatus.OK);
     }
 
-    @RequestMapping(name = "/alumnos",method =RequestMethod.POST)
+    @RequestMapping(name = "/alumno",method =RequestMethod.POST)
     public ResponseEntity<?> createAlumnos(@RequestBody Alumno alumno, UriComponentsBuilder ucBuilder){
         LOGGER.info("Se va a crear un alumno",alumno.getCedula());
 
-        Alumno currentAlumno= new Alumno();
+
 
         if (alumnoService.isExistAlumno(alumno)){
             LOGGER.error("Este alumno ya existe {}",alumno.getCedula()) ;
@@ -53,7 +53,7 @@ public class AlumnosApiController {
 
         HttpHeaders headers=new HttpHeaders();
 
-        headers.setLocation(ucBuilder.path("/api/alumnos/{id}").buildAndExpand(alumno.getCedula()).toUri());
+        headers.setLocation(ucBuilder.path("/api/alumno/{id}").buildAndExpand(alumno.getCedula()).toUri());
 
         return new ResponseEntity<String>(headers,HttpStatus.CREATED);
     }

@@ -3,12 +3,14 @@ package com.djsm.inscripcion.configuration;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -19,6 +21,7 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 import javax.persistence.EntityManagerFactory;
@@ -29,8 +32,10 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "com.djsm.inscripcion.repositories",
     entityManagerFactoryRef = "entityManagerFactory",
     transactionManagerRef = "transactionManager")
+@EnableTransactionManagement
 public class JpaConfiguration {
 
+    public static Logger LOGGER= LoggerFactory.getLogger(JpaConfiguration.class);
     @Autowired
     private Environment environment;
 
@@ -46,11 +51,18 @@ public class JpaConfiguration {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
+
         LocalContainerEntityManagerFactoryBean factoryBean =new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
+        LOGGER.info("Info Datasource         ====>",factoryBean.getDataSource().toString());
         factoryBean.setPackagesToScan(new String[] {"com.djsm.inscripcion.model"});
+
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         factoryBean.setJpaProperties(jpaProperties());
+
+        LOGGER.info("Info PersistenceUnitInfo ====>",factoryBean.getPersistenceUnitInfo());
+        LOGGER.info("Info PersistenceUnitName ====>",factoryBean.getPersistenceUnitName());
+        LOGGER.info("Info JpaVendorAdapter =======>", factoryBean.getJpaVendorAdapter());
         return factoryBean;
 
     }
@@ -58,7 +70,7 @@ public class JpaConfiguration {
     @Bean
     public DataSource dataSource() {
         DataSourceProperties dataSourceProperties = dataSourceProperties();
-        HikariDataSource dataSource = DataSourceBuilder
+        HikariDataSource dataSource = (HikariDataSource) DataSourceBuilder
                 .create(dataSourceProperties.getClassLoader())
                 .driverClassName(dataSourceProperties.getDriverClassName())
                 .url(dataSourceProperties.getUrl())

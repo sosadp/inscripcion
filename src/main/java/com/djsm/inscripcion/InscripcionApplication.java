@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Import;
 public class InscripcionApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(InscripcionApplication.class, args);
 	}
 

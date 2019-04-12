@@ -3,16 +3,16 @@ server:
     servlet:
       context-path: /ins
 spring:
-    profiles: local, default
-
+    profiles:
+      active: dev
     h2:
        console:
             enabled: true
-            path: /h2console
+            path: /h2
 
 datasource:
     insapp:
-          url: jdbc:h2:mem:testdb
+          url: jdbc:h2:file:./testdb
           username: sa
           password:
           driverClassName: org.h2.Driver

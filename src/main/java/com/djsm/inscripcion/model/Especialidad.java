@@ -1,11 +1,14 @@
 package com.djsm.inscripcion.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name="Especialidad")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Especialidad implements Serializable{
 
     @Id
