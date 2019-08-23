@@ -4,10 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
+
 @Entity
-@Table(name="Especialidad")
+@Table(name="tbl_especialidad")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Especialidad implements Serializable{
 
@@ -16,26 +20,15 @@ public class Especialidad implements Serializable{
     private Long id;
 
     @Column(name="especialidad")
-    private String especilidad;
+    private String especialidad;
 
+    //private List<Materia> materias = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(name = "mat_curso",joinColumns = @JoinColumn(name = "especialidad_id"),inverseJoinColumns = @JoinColumn(name = "materias_id"))
-    private Set<Materia> materias;
-
-    public Set<Materia> getMaterias() {
-        return materias;
-    }
-
-    public void setMaterias(Set<Materia> materias) {
-        this.materias = materias;
-    }
+    //@ManyToOne(fetch = FetchType.LAZY)
+    private Alumno alumno;
 
     public Especialidad() {
-    }
 
-    public Especialidad(String especilidad) {
-        this.especilidad = especilidad;
     }
 
     public Long getId() {
@@ -46,15 +39,8 @@ public class Especialidad implements Serializable{
         this.id = id;
     }
 
-    public String getEspecilidad() {
-        return especilidad;
+    public String getEspecialidad() {
+        return especialidad;
     }
 
-    public void setEspecilidad(String especilidad) {
-        this.especilidad = especilidad;
-    }
-
-    public Especialidad(Set<Materia> materias) {
-        this.materias = materias;
-    }
 }

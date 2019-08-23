@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gastosPerApp').controller('BudgetsController',
+angular.module('insApp').controller('BudgetsController',
     ['BudgetsService','$scope',function (BudgetsService,$scope) {
 
         var self=this;

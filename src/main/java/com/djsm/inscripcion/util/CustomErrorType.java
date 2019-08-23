@@ -4,14 +4,14 @@ package com.djsm.inscripcion.util;
  * Created by dsosa on 4/5/2019.
  */
 
-public class CustomerErrorType {
-    public String errorMessage;
+public class CustomErrorType {
+    private String errorMessage;
 
-    public CustomerErrorType(String errorMessage) {
+    public CustomErrorType(String errorMessage){
         this.errorMessage = errorMessage;
     }
 
-    public String getErrorMessage(){
+    public String getErrorMessage() {
         return errorMessage;
     }
 }

@@ -1,4 +1,4 @@
-<html lang="en" ng-app="insApp">
+<html lang="en" >
 
 <head>
     <meta charset="UTF-8">
@@ -10,39 +10,35 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
 
-    <script href="../static/js/lib/angular.min.js"></script>
 
-    <script href="../static/js/app/app.js"></script>
 
 </head>
 
-<body>
+<body >
 <!-- Just an image -->
 
-<span class="d-block p-2 bg-primary text-white"></span>
-<div class="container ">
 
+<div class="container">
 
     <div class="row">
-        <div class="col-3 mt-3">
-            <ul class="list-group">
-                <li class="list-group-item"><a >Catalogo de Estudiantes</a></li>
-                <li class="list-group-item"><a >Catalogo de Especialidades</a></li>
-                <li class="list-group-item"><a >Catalogo de Materias</a></li>
-            </ul>
-     </div>
-
-
-        <div class="row" ng-view>
+        <div class="center-block">
+            <form>
+                <div class="form-control">
+                    <input class="form-control"  type="text" placeholder="Usuario">
+                </div>
+                <div class="form-control">
+                    <input class="form-control"  type="password" placeholder="Password">
+                </div>
+            </form>
 
         </div>
-        </div>
+
     </div>
+
 
 </div>
 
@@ -54,7 +50,7 @@
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-
+<script src="../static/js/lib/angular.min.js"></script>
 
 </body>
 

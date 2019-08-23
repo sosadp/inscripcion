@@ -1,23 +1,29 @@
-var app = angular.module('gastosPerApp',['ui.router','ngStorage']);
+var app = angular.module('insApp',['ui.router','ngStorage']);
 
 app.constant('urls', {
     BASE: 'http://localhost:8080/ins',
-    ALUMNOS_SERVICE_API : 'http://localhost:8080/ins/api/concepts/'
+    ALUMNOS_SERVICE_API : 'http://localhost:8080/ins/api/alumno/'
+
 });
 
 app.config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
-            .state('home',{
-                url:'/home',
-                templateUrl:'partials/home'
+            .state('index',{
+                url:'/index',
+                templateUrl:'partials/index'
             })
 
-            .state('alumnos', {
-                url: '/alumnos',
-                templateUrl: 'partials/alumnos',
-                controller:'AlumnosController',
+            .stage('login',{
+                url:'/login',
+                templateUrl:'partials/login'
+            })
+
+            .state('alumno', {
+                url: '/alumno',
+                templateUrl: 'partials/alumno',
+                controller:'AlumnoController',
                 controllerAs:'ctrl',
                 resolve: {
                     concepts: function ($q, ConceptsService) {
@@ -28,6 +34,6 @@ app.config(['$stateProvider', '$urlRouterProvider',
                     }
                 }
             })
-        $urlRouterProvider.otherwise('/home');
+        $urlRouterProvider.otherwise('/login');
     }]);
 

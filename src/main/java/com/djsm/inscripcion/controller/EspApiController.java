@@ -1,10 +1,9 @@
 package com.djsm.inscripcion.controller;
 
 
-import com.djsm.inscripcion.model.Alumno;
 import com.djsm.inscripcion.model.Especialidad;
 import com.djsm.inscripcion.service.EspecialidadService;
-import com.djsm.inscripcion.util.CustomerErrorType;
+import com.djsm.inscripcion.util.CustomErrorType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,7 @@ public class EspApiController {
 
         if(allEsp.isEmpty()){
 
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
+            return new ResponseEntity(new CustomErrorType("No hay registros para mostrar"), HttpStatus.NO_CONTENT);
 
         }
 
@@ -49,11 +48,11 @@ public class EspApiController {
     public ResponseEntity<?> savedEsp(@RequestBody Especialidad especialidad, UriComponentsBuilder uriBuilder){
         LOGGER.info("Se creara la especialidad {}", especialidad.getId());
 
-        if (especialidadService.isExistEspe(especialidad.getEspecilidad(),especialidad.getId())){
+        if (especialidadService.isExistEspe(especialidad.getEspecialidad(),especialidad.getId())){
 
             LOGGER.info("La especialidad {}, no se puede crear",especialidad.getId());
 
-            return new ResponseEntity(new CustomerErrorType("No se puede crear "+especialidad.getId()),HttpStatus.CONFLICT);
+            return new ResponseEntity(new CustomErrorType("No se puede crear "+especialidad.getId()),HttpStatus.CONFLICT);
         }
 
         especialidadService.saveEspe(especialidad);
@@ -66,4 +65,26 @@ public class EspApiController {
 
 
     }
+/*
+    @RequestMapping(value = "/esp/{id}",method = RequestMethod.GET)
+    public ResponseEntity<Especialidad> getEsp(@PathVariable("id") Long id, @RequestBody Especialidad especialidad){
+
+        LOGGER.info("se buscara el id ",id);
+
+        Especialidad currentEsp = especialidadService.findById(id);
+
+        if (especialidadService.isExistEspe(currentEsp.getEspecialidad(),id)) {
+
+            LOGGER.info("Se actualizar los nuevos valores para {} ",id );
+            currentEsp.setEspecialidad(especialidad.getEspecialidad());
+            currentEsp.setMaterias(especialidad.getMaterias());
+            especialidadService.updateEspe(currentEsp);
+            return new ResponseEntity<Especialidad>(currentEsp,HttpStatus.OK);
+
+
+        }
+        LOGGER.error("No se puede actualizar la informacion para {} ",id);
+        return new ResponseEntity(new CustomErrorType("No se puede modificar el registro id "+id),HttpStatus.NOT_FOUND);
+    }
+*/
 }

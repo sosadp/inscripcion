@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gastosPerApp').factory('BudgetsService',
+angular.module('insApp').factory('BudgetsService',
     ['$localStorage','$http','$q','urls',
         function ($localStorage, $http,$q,urls) {
 

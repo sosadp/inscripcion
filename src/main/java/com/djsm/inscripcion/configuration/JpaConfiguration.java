@@ -55,7 +55,7 @@ public class JpaConfiguration {
         LocalContainerEntityManagerFactoryBean factoryBean =new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
         LOGGER.info("Info Datasource         ====>",factoryBean.getDataSource().toString());
-        factoryBean.setPackagesToScan(new String[] {"com.djsm.inscripcion.model"});
+        factoryBean.setPackagesToScan(new String[] {"com.djsm.Inscripcion.model"});
 
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         factoryBean.setJpaProperties(jpaProperties());

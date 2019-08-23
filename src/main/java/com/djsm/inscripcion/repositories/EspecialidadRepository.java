@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EspecialidadRepository extends JpaRepository<Especialidad,Long>{
 
-    Especialidad findByEspecilidadAndId(String especialidad,Long id);
+    Especialidad findByEspecialidadAndId(String especialidad,Long id);
 
 }

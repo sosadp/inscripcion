@@ -47,6 +47,6 @@ public class EspecialidadServiceImpl implements EspecialidadService{
 
     @Override
     public Boolean isExistEspe(String especialidad, Long id) {
-        return especialidadRepository.findByEspecilidadAndId(especialidad, id)!=null;
+        return especialidadRepository.findByEspecialidadAndId(especialidad, id)!=null;
     }
 }
