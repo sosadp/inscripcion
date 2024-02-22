@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +23,11 @@ public class UserSecurity implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        User us= userRepository.findByName(userName);
+        User us = userRepository.findByName(userName);
 
         List<GrantedAuthority> roles= new ArrayList<>();
         roles.add(new SimpleGrantedAuthority("ADMIN"));
+
 
         UserDetails userDetails= new org.springframework.security.core.userdetails.User(us.getName(),us.getPass(),roles);
 

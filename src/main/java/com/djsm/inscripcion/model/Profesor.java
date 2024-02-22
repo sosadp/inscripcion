@@ -1,14 +1,18 @@
 package com.djsm.inscripcion.model;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Created by dsosa on 8/1/2019.
  */
 @Entity
 @Table(name = "tbl_profesor")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Profesor {
 
     @Id
@@ -20,32 +24,5 @@ public class Profesor {
 
     @Column(name = "apellido")
     private String apellido;
-
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
 
 }

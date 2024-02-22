@@ -2,7 +2,6 @@ package com.djsm.inscripcion.service;
 
 import com.djsm.inscripcion.model.User;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 /**

@@ -1,6 +1,7 @@
 package com.djsm.inscripcion.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 
 /**
  * Created by dsosa on 8/1/2019.

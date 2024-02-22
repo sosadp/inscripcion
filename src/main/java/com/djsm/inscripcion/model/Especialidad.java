@@ -1,8 +1,12 @@
 package com.djsm.inscripcion.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -13,6 +17,9 @@ import java.util.Set;
 @Entity
 @Table(name="tbl_especialidad")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Especialidad implements Serializable{
 
     @Id
@@ -26,21 +33,4 @@ public class Especialidad implements Serializable{
 
     //@ManyToOne(fetch = FetchType.LAZY)
     private Alumno alumno;
-
-    public Especialidad() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
 }

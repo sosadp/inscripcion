@@ -1,16 +1,21 @@
 package com.djsm.inscripcion.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
+
 
 /**
  * Created by dsosa on 7/23/2019.
  */
 @Entity
 @Table(name = "tbl_inscripcion")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Inscripcion implements Serializable{
 
     @Id
@@ -20,20 +25,5 @@ public class Inscripcion implements Serializable{
     @Column(name = "ins_date")
     private Date ins_date;
 
-
     private Especialidad especialidad;
-
-
-    public Inscripcion() {
-    }
-
-    public Long getInsid() {
-        return id;
-    }
-
-    public void setInsid(Long insid) {
-        this.id = insid;
-    }
-
-
 }

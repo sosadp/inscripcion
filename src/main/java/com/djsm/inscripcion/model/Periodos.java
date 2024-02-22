@@ -1,8 +1,10 @@
 package com.djsm.inscripcion.model;
 
-import javax.persistence.*;
+
+import jakarta.persistence.*;
+
 import java.io.Serializable;
-import java.util.List;
+
 
 /**
  * Created by dsosa on 7/23/2019.
